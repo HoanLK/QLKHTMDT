@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Đăng ký thành công";
+    Layout = "/Views/Shared/_LayoutNoSidebar.cshtml";
+}
+
+<div class="login-container lightmode">
+    <div class="login-box animated fadeInDown">
+        <div class="login-body">
+            <div>
+                <h1>@ViewBag.Title</h1>
+                <div style="font-size: 14px">
+                    <p>@ViewBag.Message</p><br />
+
+                    @if (TempData["ViewBagLink"] != null)
+                    {
+                        <p>
+                            Hoặc nhấn <a href="@TempData["ViewBagLink"]">vào đây</a> để kích hoạt thủ công.
+
+                        </p>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

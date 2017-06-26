@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "QUẢN LÝ ĐƠN HÀNG";
+}
+
+<div ng-controller="quanlyDonHangController">
+    <div class="form-horizontal">
+        <div class="panel panel-default">
+            <div class="panel-heading ui-draggable-handle">
+                <h3 class="panel-title"><strong>@ViewBag.Title</strong></h3>
+            </div>
+            <div class="panel-body">
+                <!--DonHang Grid-->
+                <div class="col-md-12 col-sm-12 col-xs-12" id="donhang">
+                    <div id="gridContainer" dx-data-grid="gridDonHangs"></div>
+                    <div dx-context-menu="contextMenuDonHangs"></div>
+                </div>
+
+                <!--ACCOUNT-->
+                <!--Popup Modify-->
+                <div class="popup" dx-popup="popupModifyDonHang">
+                    <div data-options="dxTemplate: { name:'templateModifyDonHang' }">
+                        <form ng-submit="SaveDonHang($event)" dx-validation-group="{donhang}">
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Số hiệu <span class="text-danger" title="Vui lòng nhập trường này" data-toggle="tooltip">(*)</span></label>
+                                        <div dx-text-box="controlModifyDonHang.soHieu"
+                                             dx-validator="{validationRules:[{type: 'required', message: 'Nhập số hiệu'}]}"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Thời gian tạo đơn hàng</label>
+                                        <div dx-date-box="controlModifyDonHang.thoigianTaoDonHang"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Người nhận</label>
+                                        <div dx-text-box="controlModifyDonHang.nguoiNhan"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>SĐT người nhận</label>
+                                        <div dx-text-box="controlModifyDonHang.sdtNguoiNhan"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Địa chỉ người nhận</label>
+                                        <div dx-text-box="controlModifyDonHang.diachiNguoiNhan"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Tỉnh - Thành phố</label>
+                                        <div dx-select-box="controlModifyDonHang.tinhthanhpho"
+                                             dx-validator="{validationRules:[{type: 'required', message: 'Chọn Tỉnh - Thành phố'}]}"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Số tiền thu hộ <span style="font-weight:300">(vnđ)</span></label>
+                                        <div class="dx-texteditor">
+                                            <div class="dx-texteditor-container">
+                                                <input type="text" class="dx-texteditor-input" style="text-align: right" fcsa-number ng-model="donhang.SoTienThuHo" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Nội dung hàng</label>
+                                        <div dx-text-area="controlModifyDonHang.noidungHang"></div>
+                                    </div>
+                                </div>
+                                <div dx-validation-summary="{donhang}"></div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="pull-left" dx-button="{ text: 'Lưu', icon: 'floppy', type: 'success', useSubmitBehavior: true }"></div>
+                                <div class="pull-right" dx-button="{ text: 'Hủy bỏ', icon: 'clear', onClick: CancelSaveDonHang, type: 'danger' }"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--Popup Delete-->
+                <div class="popup" dx-popup="popupDeleteDonHang">
+                    <div data-options="dxTemplate: { name:'templateDeleteDonHang' }">
+                        <div style="text-align: center" ng-cloak>{{titleDeleteDonHang}}</div>
+                        <br />
+                        <div dx-button="{ text: 'Có', icon: 'floppy', onClick: ConfirmDeleteDonHang, type: 'success' }"></div>
+                        <div dx-button="{ text: 'Không', icon: 'clear', onClick: CancelDeleteDonHang, type: 'danger' }"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

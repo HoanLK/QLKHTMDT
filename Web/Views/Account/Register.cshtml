@@ -1,0 +1,78 @@
+﻿@model Web.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Tạo tài khoản";
+}
+<div class="form-horizontal" ng-controller="registerController">
+    <div class="panel panel-default">
+        <div class="panel-heading ui-draggable-handle">
+            <h3 class="panel-title"><strong>TẠO TÀI KHOẢN</strong></h3>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="col-md-6 col-md-offset-3 ">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.TenNguoiDung, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.TenNguoiDung, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.DiaChi, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.DiaChi, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.DonVi_ID, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("DonVi_ID", null, "-- Chọn đơn vị --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Role, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("Role", null, "-- Chọn quyền --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-6">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-6">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-6">
+                        <input type="submit" class="btn btn-success pull-left" value="Tạo tài khoản" />
+                        <a class="btn btn-danger pull-right" href="/Account">Hủy bỏ</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

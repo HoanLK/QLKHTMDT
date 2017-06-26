@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Xác nhận Email";
+    Layout = "/Views/Shared/_LayoutNoSidebar.cshtml";
+}
+
+<div class="login-container lightmode">
+    <div class="login-box animated fadeInDown">
+        <div class="login-body">
+            <div>
+                <h1>@ViewBag.Title</h1>
+                <p style="font-size: 14px">
+                    Cảm ơn bạn đã xác nhận Email.<br />
+                    Vui lòng @Html.ActionLink("Nhấn vào đây ", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) để Đăng nhập
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

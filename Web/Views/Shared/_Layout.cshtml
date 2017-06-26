@@ -1,0 +1,272 @@
+﻿@using Microsoft.AspNet.Identity;
+@using Web.Models;
+<!DOCTYPE html>
+<html ng-app="admin" lang="vi">
+<head>
+    <!-- META SECTION -->
+    <title>VNPOST</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="MYO-SOLUTION" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <!--BOOTSTRAP-->
+    <link href="~/Content/Templates/Joli/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+
+    <!--TOAST-->
+    <link href="~/Content/Vendors/toastr/toastr.min.css" rel="stylesheet" />
+
+    <!--FONTAWESOME-->
+    <link href="~/Content/Vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--DEVEXTREME-->
+    <link href="~/Content/Vendors/DevExtreme/Lib/css/dx.spa.css" rel="stylesheet" />
+    <link href="~/Content/Vendors/DevExtreme/Lib/css/dx.common.css" rel="stylesheet" />
+    <link href="~/Content/Vendors/DevExtreme/Lib/css/dx.light.css" rel="stylesheet" />
+
+    <!--NgPrint-->
+    <link href="~/Content/Vendors/ngPrint/ngPrint.min.css" rel="stylesheet" />
+    <link href="~/Content/Vendors/ngPrint/gistfile1.css" rel="stylesheet" />
+
+    <!-- TEMPLATE -->
+    <link href="~/Content/Templates/Joli/css/theme-default.css" rel="stylesheet" />
+</head>
+<body>
+    @{ 
+        MainDBEntities db = new MainDBEntities();
+        ApplicationDbContext _context = new ApplicationDbContext();
+        var idUser = User.Identity.GetUserId();
+        var userInfo = db.AspNetUsers.Where(p => p.Id == idUser).FirstOrDefault();
+        var user = _context.Users.Where(p => p.Id == idUser).FirstOrDefault();
+        string tenKhachHang = "";
+        string diachiKhachHang = "";
+        if(user.Roles.ToList()[0].RoleId == "khachhang")
+        {
+            tenKhachHang = userInfo.TenNguoiDung;
+            diachiKhachHang = userInfo.DiaChi;
+        }
+        if (user.Roles.ToList()[0].RoleId == "nhanvien")
+        {
+            var khachhang = db.AspNetUsers.Where(p => p.Id == userInfo.KhachHang_ID).FirstOrDefault();
+            if(khachhang != null)
+            {
+                tenKhachHang = khachhang.TenNguoiDung;
+                diachiKhachHang = khachhang.DiaChi;
+            }
+        }
+    }
+    <!--User and Roles-->
+    <input type="hidden" value="@User.Identity.GetUserId()" id="idUser" />
+    <div class="page-container">
+        <!-- SIDEBAR -->
+        <div class="page-sidebar page-sidebar-fixed scroll mCustomScrollbar _mCS_1 mCS-autoHide">
+            <!-- X-NAVIGATION -->
+            <ul class="x-navigation" style="background: #e2a513;">
+                <!-- LOGO -->
+                <li class="xn-logo" style="background: #fff; padding: 15px;">
+                    @*<a href="#">MYOSOLUTION</a>*@
+                    <img src="~/Content/Templates/Joli/img/logo.png" style="width: 100%" />
+                    <a href="#" class="x-navigation-control"></a>
+                </li>
+                <!-- PROFILE -->
+                <li class="xn-profile">
+                    <a href="#" class="profile-mini">
+                        <img src="~/Content/Templates/Joli/assets/images/users/no-image.jpg" />
+                    </a>
+                    <div class="profile" style="background: #e2a513;">
+                        <div class="profile-image">
+                            <img src="~/Content/Templates/Joli/assets/images/users/no-image.jpg" />
+                        </div>
+                        <div class="profile-data">
+                            <div class="profile-data-name">@userInfo.TenNguoiDung</div>
+                            @if (user.Roles.ToList()[0].RoleId == "nhanvienbuudien")
+                            {
+                                <div class="profile-data-title">Nhân viên Bưu điện</div>
+                            }
+                            @if (user.Roles.ToList()[0].RoleId == "khachhang")
+                            {
+                                <div class="profile-data-title">Khách hàng</div>
+                            }
+                            @if (user.Roles.ToList()[0].RoleId == "nhanvien")
+                            {
+                                <div class="profile-data-title">Nhân viên</div>
+                            }
+                            
+                        </div>
+                        <div class="profile-controls">
+                            <a href="/Manage" class="profile-control-left" title="Chỉnh sửa thông tin"><span class="fa fa-info"></span></a>
+                            <a href="/Account/Logoff" class="profile-control-right" title="Đăng xuất"><span class="fa fa-sign-out"></span></a>
+                        </div>
+                    </div>
+                </li>
+                @*<li class="xn-title">Navigation</li>*@
+                @*<li>
+                    <a href="/Account/KhachHang"><span class="fa  fa-user-secret"></span> <span class="xn-text">Danh sách Khách hàng</span></a>
+                </li>
+                <li>
+                    <a href="/Account/NhanVien"><span class="fa  fa-user-circle-o"></span> <span class="xn-text">Danh sách Nhân viên</span></a>
+                </li>
+                <li>
+                    <a href="/DonHang/QuanLyDonHang"><span class="fa fa-list-alt"></span> <span class="xn-text">Quản lý đơn hàng</span></a>
+                </li>
+                <li>
+                    <a href="/DonHang/ChotDonHang"><span class="fa fa-thumb-tack"></span> <span class="xn-text">Chốt đơn hàng</span></a>
+                </li>
+                <li>
+                    <a href="/DonHang/XacNhanDonHang"><span class="fa fa-check"></span> <span class="xn-text">Xác nhận đơn hàng</span></a>
+                </li>*@
+                @if (user.Roles.ToList()[0].RoleId == "nhanvienbuudien")
+                {
+                    <li>
+                        <a href="/Account/NhanVienQuanLy"><span class="fa  fa-user-secret"></span> <span class="xn-text">Danh sách Quản lý</span></a>
+                    </li>
+                    <li>
+                        <a href="/DonHang/XacNhanDonHang"><span class="fa fa-check"></span> <span class="xn-text">Xác nhận đơn hàng</span></a>
+                    </li>
+                }
+                @if (user.Roles.ToList()[0].RoleId == "khachhang")
+                {
+                    <li>
+                        <a href="/Account/NhanVien"><span class="fa  fa-user-circle-o"></span> <span class="xn-text">Danh sách Nhân viên</span></a>
+                    </li>
+                    <li>
+                        <a href="/DonHang/ChotDonHang"><span class="fa fa-thumb-tack"></span> <span class="xn-text">Chốt đơn hàng</span></a>
+                    </li>
+                }
+                @if (user.Roles.ToList()[0].RoleId == "nhanvien")
+                {
+                    <li>
+                        <a href="/DonHang/QuanLyDonHang"><span class="fa fa-list-alt"></span> <span class="xn-text">Quản lý đơn hàng</span></a>
+                    </li>
+                }
+
+            </ul>
+            
+        </div>
+
+        <!-- CONTENT -->
+        <div class="page-content">
+
+            <!-- X-NAVIGATION VERTICAL -->
+            <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="background: #e2a513;">
+                <!-- TOGGLE NAVIGATION -->
+                <li class="xn-icon-button">
+                    <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
+                </li>
+                <li style="margin-top: 10px">
+                    <b style="font-size: 1.3em; text-transform: uppercase; color: #00458A">Bưu điện thành phố Hải Phòng</b><br />
+                    <span style="font-size: 1.1em">Hệ thống quản lý đơn hàng khách hàng thương mại điện tử</span><br />
+                </li>
+                <li style="padding-left: 200px; margin-top: 10px">
+                    <b>Khách hàng: @tenKhachHang</b><br />
+                    <b>Địa chỉ: @diachiKhachHang</b><br />
+                </li>
+            </ul>
+            <!-- BREADCRUMB -->
+            @*<ul class="breadcrumb">
+                    <li><a href="#">Link</a></li>
+                    <li class="active">Active</li>
+                </ul>*@
+            @*<div class="page-title">
+                    <h2><span class="fa fa-arrow-circle-o-left"></span> Page Title</h2>
+                </div>*@
+            <!-- CONTENT WRAPPER -->
+            <div class="page-content-wrap">
+                <div class="row">
+                    <div class="col-md-12" style="margin:0px; padding: 0px;">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SCRIPTS -->
+    @RenderSection("scripts", required: false)
+
+    <!-- PLUGINS -->
+    <script src="~/Content/Templates/Joli/js/plugins/jquery/jquery.min.js"></script>
+    @*<script src="~/Scripts/jquery-1.8.0.min.js"></script>*@
+    <script src="~/Content/Templates/Joli/js/plugins/jquery/jquery-ui.min.js"></script>
+    <script src="~/Content/Templates/Joli/js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Scripts/qrcode.js"></script>
+
+    <!--PAGE PLUGINS-->
+    <script src="~/Content/Templates/Joli/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+    <script src="~/Content/Templates/Joli/js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+
+    <!-- TEMPLATE -->
+    <script src="~/Content/Templates/Joli/js/plugins.js"></script>
+    <script src="~/Content/Templates/Joli/js/actions.js"></script>
+
+    <!--DEVEXTREME-->
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/jszip.min.js"></script>
+
+    <!--ANGULARJS-->
+    <script src="~/Content/Vendors/angular-1.6.4/angular.min.js"></script>
+    <script src="~/Content/Vendors/angular-1.6.4/angular-sanitize.min.js"></script>
+    <script src="~/Content/Vendors/angular-1.6.4/angular-route.min.js"></script>
+    <script src="~/Content/Vendors/angular-1.6.4/angular-touch.min.js"></script>
+    <script src="~/Content/Vendors/angular-1.6.4/angular-cookies.min.js"></script>
+
+    <!--NG-PRINT-->
+    <script src="~/Content/Vendors/ngPrint/ngPrint.min.js"></script>
+
+    <!--TOAST-->
+    <script src="~/Content/Vendors/toastr/toastr.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            toastr.options = {
+                "positionClass": "toast-bottom-right",
+                "timeOut": "1500",
+                "progressBar": true
+            };
+        });
+    </script>
+
+    <!--LOADING SPINNER-->
+    <script src="~/Content/Vendors/loading-spinner/spin.min.js"></script>
+    <script src="~/Content/Vendors/loading-spinner/angular-spinner.min.js"></script>
+    <script src="~/Content/Vendors/loading-spinner/angular-loading-spinner.js"></script>
+
+    <!--FCSA-NUMBER FORMAT TEXTBOX-->
+    <script src="~/Content/Vendors/fcsa-number/fcsaNumber.min.js"></script>
+
+    <!--DEVEXTREME-->
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/cldr.min.js"></script>
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/cldr/event.min.js"></script>
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/cldr/supplemental.min.js"></script>
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/cldr/unresolved.min.js"></script>
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/globalize.min.js"></script>
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/globalize/message.min.js"></script>
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/globalize/number.min.js"></script>
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/globalize/currency.min.js"></script>
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/globalize/date.min.js"></script>
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/dx.all.js"></script>
+
+    <!-- MY SCRIPTS-->
+    <script src="~/Scripts/Admin/admin.js"></script>
+
+    <!--Service-->
+
+    <!--Controller-->
+    <!--Sidebar-->
+    <script src="~/Scripts/Admin/Sidebar/infoUserSidebarController.js"></script>
+    <!--Account-->
+    <script src="~/Scripts/Admin/Account/accountController.js"></script>
+    <script src="~/Scripts/Admin/Account/registerController.js"></script>
+    <script src="~/Scripts/Admin/Account/nhanvienquanlyController.js"></script>
+    <script src="~/Scripts/Admin/Account/nhanvienController.js"></script>
+
+    <!--Đơn hàng-->
+    <script src="~/Scripts/Admin/DonHang/quanlyDonHangController.js"></script>
+    <script src="~/Scripts/Admin/DonHang/chotDonHangController.js"></script>
+    <script src="~/Scripts/Admin/DonHang/xacnhanDonHangController.js"></script>
+
+</body>
+</html>
+
+
+

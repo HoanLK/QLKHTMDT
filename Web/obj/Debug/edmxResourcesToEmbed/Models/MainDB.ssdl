@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MainDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="GoogleAuthenticatorSecretKey" Type="nvarchar(max)" />
+    <Property Name="IsGoogleAuthenticatorEnabled" Type="bit" Nullable="false" />
+    <Property Name="DonVi_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="KhachHang_ID" Type="nvarchar" MaxLength="128" />
+    <Property Name="NhanVienBuuDien_ID" Type="nvarchar" MaxLength="128" />
+    <Property Name="TenNguoiDung" Type="nvarchar" MaxLength="100" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsQuyenKhachHang" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CapDaiSo">
+    <Key>
+      <PropertyRef Name="NgayGioCap" />
+    </Key>
+    <Property Name="NgayGioCap" Type="datetime" Nullable="false" />
+    <Property Name="DichVu_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoLuong" Type="float" />
+    <Property Name="MaSoBatDau" Type="float" />
+    <Property Name="MaSoKetThuc" Type="float" />
+  </EntityType>
+  <EntityType Name="ChiTietChotDonHang">
+    <Key>
+      <PropertyRef Name="SoHieu" />
+    </Key>
+    <Property Name="ChotDonHang_ID" Type="int" />
+    <Property Name="SoHieu" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ChotDonHang">
+    <Key>
+      <PropertyRef Name="ChotDonHang_ID" />
+    </Key>
+    <Property Name="Ngay" Type="date" />
+    <Property Name="NguoiDung_ID" Type="nvarchar" MaxLength="128" />
+    <Property Name="NhanVien_ID" Type="nvarchar" MaxLength="128" />
+    <Property Name="KhachHang_ID" Type="nvarchar" MaxLength="128" />
+    <Property Name="ChotDonHang_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ThoiGianChotDonHang" Type="datetime" />
+    <Property Name="DonVi_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="TrangThaiChotDonHang" Type="nvarchar" MaxLength="50" />
+    <Property Name="TrangThaiXacNhanDonHang" Type="nvarchar" MaxLength="50" />
+    <Property Name="ThoiGianXacNhanDonHang" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DichVu">
+    <Key>
+      <PropertyRef Name="DichVu_ID" />
+    </Key>
+    <Property Name="DichVu_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DichVu" Type="nvarchar" MaxLength="300" />
+    <Property Name="MoTaDichVu" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="DonHang">
+    <Key>
+      <PropertyRef Name="SoHieu" />
+    </Key>
+    <Property Name="Ngay" Type="date" />
+    <Property Name="KhachHang_ID" Type="nvarchar" MaxLength="128" />
+    <Property Name="NhanVien_ID" Type="nvarchar" MaxLength="128" />
+    <Property Name="ThoiGianTaoDonHang" Type="datetime" />
+    <Property Name="SoHieu" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NguoiNhan" Type="nvarchar" MaxLength="500" />
+    <Property Name="DiaChiNguoiNhan" Type="nvarchar" MaxLength="500" />
+    <Property Name="TinhThanhPho_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoDienThoaiNguoiNhan" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoTienThuHo" Type="float" />
+    <Property Name="NoiDungHang" Type="nvarchar" MaxLength="500" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DonVi">
+    <Key>
+      <PropertyRef Name="DonVi_ID" />
+    </Key>
+    <Property Name="DonVi_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DonVi_Name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="KhachHang_ID" />
+    </Key>
+    <Property Name="DonVi_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="KhachHang_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="KhachHang_Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
+    <Property Name="DienThoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="KhoSo">
+    <Key>
+      <PropertyRef Name="SoHieu" />
+    </Key>
+    <Property Name="DichVu_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SoHieu" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="NguoiDung">
+    <Key>
+      <PropertyRef Name="NguoiDung_ID" />
+    </Key>
+    <Property Name="DonVi_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="NguoiDung_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="TenNguoiDung" Type="nvarchar" MaxLength="100" />
+    <Property Name="TenTruyCap" Type="nvarchar" MaxLength="50" />
+    <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuyenBuuDien_ID" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="NhanVien_ID" />
+    </Key>
+    <Property Name="KhachHang_ID" Type="nvarchar" MaxLength="128" />
+    <Property Name="NhanVien_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="NhanVien" Type="nvarchar" MaxLength="100" />
+    <Property Name="TenTruyCap" Type="nvarchar" MaxLength="50" />
+    <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuyenKhachHang_ID" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="QuyenBuuDien">
+    <Key>
+      <PropertyRef Name="QuyenBuuDien_ID" />
+    </Key>
+    <Property Name="QuyenBuuDien_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="QuyenBuuDien" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="QuyenKhachHang">
+    <Key>
+      <PropertyRef Name="QuyenKhachHang_ID" />
+    </Key>
+    <Property Name="QuyenKhachHang_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="QuyenKhachHang" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TinhThanhPho">
+    <Key>
+      <PropertyRef Name="TinhThanhPho_ID" />
+    </Key>
+    <Property Name="TinhThanhPho_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TinhThanhPho_Name" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <Association Name="ChotDonHang_ID_FK_On_ChiTietChotDonHang">
+    <End Role="ChotDonHang" Type="Self.ChotDonHang" Multiplicity="0..1" />
+    <End Role="ChiTietChotDonHang" Type="Self.ChiTietChotDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChotDonHang">
+        <PropertyRef Name="ChotDonHang_ID" />
+      </Principal>
+      <Dependent Role="ChiTietChotDonHang">
+        <PropertyRef Name="ChotDonHang_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DichVu_ID_FK_On_CapDaiSo">
+    <End Role="DichVu" Type="Self.DichVu" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CapDaiSo" Type="Self.CapDaiSo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DichVu">
+        <PropertyRef Name="DichVu_ID" />
+      </Principal>
+      <Dependent Role="CapDaiSo">
+        <PropertyRef Name="DichVu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DichVu_ID_FK_On_KhoSo">
+    <End Role="DichVu" Type="Self.DichVu" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="KhoSo" Type="Self.KhoSo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DichVu">
+        <PropertyRef Name="DichVu_ID" />
+      </Principal>
+      <Dependent Role="KhoSo">
+        <PropertyRef Name="DichVu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DonVi_ID_FK_On_AspNetUsers">
+    <End Role="DonVi" Type="Self.DonVi" Multiplicity="0..1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonVi">
+        <PropertyRef Name="DonVi_ID" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="DonVi_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DonVi_ID_FK_On_ChotDonHang">
+    <End Role="DonVi" Type="Self.DonVi" Multiplicity="0..1" />
+    <End Role="ChotDonHang" Type="Self.ChotDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonVi">
+        <PropertyRef Name="DonVi_ID" />
+      </Principal>
+      <Dependent Role="ChotDonHang">
+        <PropertyRef Name="DonVi_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DonVi_ID_FK_On_KhachHang">
+    <End Role="DonVi" Type="Self.DonVi" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonVi">
+        <PropertyRef Name="DonVi_ID" />
+      </Principal>
+      <Dependent Role="KhachHang">
+        <PropertyRef Name="DonVi_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DonVi_ID_FK_On_NguoiDung">
+    <End Role="DonVi" Type="Self.DonVi" Multiplicity="0..1" />
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonVi">
+        <PropertyRef Name="DonVi_ID" />
+      </Principal>
+      <Dependent Role="NguoiDung">
+        <PropertyRef Name="DonVi_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KhachHang_ID_FK_On_NhanVien">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="KhachHang_ID" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="KhachHang_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuyenBuuDien_ID_FK_On_NguoiDung">
+    <End Role="QuyenBuuDien" Type="Self.QuyenBuuDien" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuyenBuuDien">
+        <PropertyRef Name="QuyenBuuDien_ID" />
+      </Principal>
+      <Dependent Role="NguoiDung">
+        <PropertyRef Name="QuyenBuuDien_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuyenKhachHang_ID_FK_On_NhanVien">
+    <End Role="QuyenKhachHang" Type="Self.QuyenKhachHang" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuyenKhachHang">
+        <PropertyRef Name="QuyenKhachHang_ID" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="QuyenKhachHang_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TinhThanhPho_ID_FK_On_DonHang">
+    <End Role="TinhThanhPho" Type="Self.TinhThanhPho" Multiplicity="0..1" />
+    <End Role="DonHang" Type="Self.DonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TinhThanhPho">
+        <PropertyRef Name="TinhThanhPho_ID" />
+      </Principal>
+      <Dependent Role="DonHang">
+        <PropertyRef Name="TinhThanhPho_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MainDBModelStoreContainer">
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CapDaiSo" EntityType="Self.CapDaiSo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChiTietChotDonHang" EntityType="Self.ChiTietChotDonHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChotDonHang" EntityType="Self.ChotDonHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DichVu" EntityType="Self.DichVu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonHang" EntityType="Self.DonHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonVi" EntityType="Self.DonVi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KhoSo" EntityType="Self.KhoSo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuyenBuuDien" EntityType="Self.QuyenBuuDien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuyenKhachHang" EntityType="Self.QuyenKhachHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TinhThanhPho" EntityType="Self.TinhThanhPho" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="ChotDonHang_ID_FK_On_ChiTietChotDonHang" Association="Self.ChotDonHang_ID_FK_On_ChiTietChotDonHang">
+      <End Role="ChotDonHang" EntitySet="ChotDonHang" />
+      <End Role="ChiTietChotDonHang" EntitySet="ChiTietChotDonHang" />
+    </AssociationSet>
+    <AssociationSet Name="DichVu_ID_FK_On_CapDaiSo" Association="Self.DichVu_ID_FK_On_CapDaiSo">
+      <End Role="DichVu" EntitySet="DichVu" />
+      <End Role="CapDaiSo" EntitySet="CapDaiSo" />
+    </AssociationSet>
+    <AssociationSet Name="DichVu_ID_FK_On_KhoSo" Association="Self.DichVu_ID_FK_On_KhoSo">
+      <End Role="DichVu" EntitySet="DichVu" />
+      <End Role="KhoSo" EntitySet="KhoSo" />
+    </AssociationSet>
+    <AssociationSet Name="DonVi_ID_FK_On_AspNetUsers" Association="Self.DonVi_ID_FK_On_AspNetUsers">
+      <End Role="DonVi" EntitySet="DonVi" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="DonVi_ID_FK_On_ChotDonHang" Association="Self.DonVi_ID_FK_On_ChotDonHang">
+      <End Role="DonVi" EntitySet="DonVi" />
+      <End Role="ChotDonHang" EntitySet="ChotDonHang" />
+    </AssociationSet>
+    <AssociationSet Name="DonVi_ID_FK_On_KhachHang" Association="Self.DonVi_ID_FK_On_KhachHang">
+      <End Role="DonVi" EntitySet="DonVi" />
+      <End Role="KhachHang" EntitySet="KhachHang" />
+    </AssociationSet>
+    <AssociationSet Name="DonVi_ID_FK_On_NguoiDung" Association="Self.DonVi_ID_FK_On_NguoiDung">
+      <End Role="DonVi" EntitySet="DonVi" />
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="KhachHang_ID_FK_On_NhanVien" Association="Self.KhachHang_ID_FK_On_NhanVien">
+      <End Role="KhachHang" EntitySet="KhachHang" />
+      <End Role="NhanVien" EntitySet="NhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="QuyenBuuDien_ID_FK_On_NguoiDung" Association="Self.QuyenBuuDien_ID_FK_On_NguoiDung">
+      <End Role="QuyenBuuDien" EntitySet="QuyenBuuDien" />
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="QuyenKhachHang_ID_FK_On_NhanVien" Association="Self.QuyenKhachHang_ID_FK_On_NhanVien">
+      <End Role="QuyenKhachHang" EntitySet="QuyenKhachHang" />
+      <End Role="NhanVien" EntitySet="NhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="TinhThanhPho_ID_FK_On_DonHang" Association="Self.TinhThanhPho_ID_FK_On_DonHang">
+      <End Role="TinhThanhPho" EntitySet="TinhThanhPho" />
+      <End Role="DonHang" EntitySet="DonHang" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

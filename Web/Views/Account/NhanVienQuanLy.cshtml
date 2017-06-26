@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "DANH SÁCH NHÂN VIÊN QUẢN LÝ";
+}
+
+<div ng-controller="nhanvienquanlyController">
+    <div class="form-horizontal">
+        <div class="panel panel-default">
+            <div class="panel-heading ui-draggable-handle">
+                <h3 class="panel-title"><strong>@ViewBag.Title</strong></h3>
+            </div>
+            <div class="panel-body">
+                <!--Account Grid-->
+                <div class="col-md-12 col-sm-12 col-xs-12" id="account">
+                    <div id="gridContainer" dx-data-grid="gridAccounts"></div>
+                    <div dx-context-menu="contextMenuAccounts"></div>
+                </div>
+
+                <!--ACCOUNT-->
+                <!--Popup Modify-->
+                <div class="popup" dx-popup="popupModifyAccount">
+                    <div data-options="dxTemplate: { name:'templateModifyAccount' }">
+                        <form ng-submit="SaveAccount($event)" dx-validation-group="{account}">
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Tên người dùng <span class="text-danger" title="Vui lòng nhập trường này" data-toggle="tooltip">(*)</span></label>
+                                        <div dx-text-box="controlModifyAccount.tenNguoiDung"
+                                             dx-validator="{validationRules:[{type: 'required', message: 'Nhập tên người dùng'}]}"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Số điện thoại</label>
+                                        <div dx-text-box="controlModifyAccount.dienthoai"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Địa chỉ</label>
+                                        <div dx-text-box="controlModifyAccount.diachi"></div>
+                                    </div>
+                                </div>
+                                <div dx-validation-summary="{account}"></div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="pull-left" dx-button="{ text: 'Lưu', icon: 'floppy', type: 'success', useSubmitBehavior: true }"></div>
+                                <div class="pull-right" dx-button="{ text: 'Hủy bỏ', icon: 'clear', onClick: CancelSaveAccount, type: 'danger' }"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--Popup Delete-->
+                <div class="popup" dx-popup="popupDeleteAccount">
+                    <div data-options="dxTemplate: { name:'templateDeleteAccount' }">
+                        <div style="text-align: center" ng-cloak>{{titleDeleteAccount}}</div>
+                        <br />
+                        <div dx-button="{ text: 'Có', icon: 'floppy', onClick: ConfirmDeleteAccount, type: 'success' }"></div>
+                        <div dx-button="{ text: 'Không', icon: 'clear', onClick: CancelDeleteAccount, type: 'danger' }"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

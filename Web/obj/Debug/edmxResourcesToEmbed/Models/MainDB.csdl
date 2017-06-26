@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MainDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MainDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetRoles" EntityType="MainDBModel.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="MainDBModel.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="MainDBModel.AspNetUserLogins" />
+    <EntitySet Name="AspNetUsers" EntityType="MainDBModel.AspNetUsers" />
+    <EntitySet Name="CapDaiSo" EntityType="MainDBModel.CapDaiSo" />
+    <EntitySet Name="ChiTietChotDonHang" EntityType="MainDBModel.ChiTietChotDonHang" />
+    <EntitySet Name="ChotDonHang" EntityType="MainDBModel.ChotDonHang" />
+    <EntitySet Name="DichVu" EntityType="MainDBModel.DichVu" />
+    <EntitySet Name="DonHang" EntityType="MainDBModel.DonHang" />
+    <EntitySet Name="DonVi" EntityType="MainDBModel.DonVi" />
+    <EntitySet Name="KhachHang" EntityType="MainDBModel.KhachHang" />
+    <EntitySet Name="KhoSo" EntityType="MainDBModel.KhoSo" />
+    <EntitySet Name="NguoiDung" EntityType="MainDBModel.NguoiDung" />
+    <EntitySet Name="NhanVien" EntityType="MainDBModel.NhanVien" />
+    <EntitySet Name="QuyenBuuDien" EntityType="MainDBModel.QuyenBuuDien" />
+    <EntitySet Name="QuyenKhachHang" EntityType="MainDBModel.QuyenKhachHang" />
+    <EntitySet Name="sysdiagrams" EntityType="MainDBModel.sysdiagrams" />
+    <EntitySet Name="TinhThanhPho" EntityType="MainDBModel.TinhThanhPho" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="MainDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="MainDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="DonVi_ID_FK_On_AspNetUsers" Association="MainDBModel.DonVi_ID_FK_On_AspNetUsers">
+      <End Role="DonVi" EntitySet="DonVi" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="DichVu_ID_FK_On_CapDaiSo" Association="MainDBModel.DichVu_ID_FK_On_CapDaiSo">
+      <End Role="DichVu" EntitySet="DichVu" />
+      <End Role="CapDaiSo" EntitySet="CapDaiSo" />
+    </AssociationSet>
+    <AssociationSet Name="ChotDonHang_ID_FK_On_ChiTietChotDonHang" Association="MainDBModel.ChotDonHang_ID_FK_On_ChiTietChotDonHang">
+      <End Role="ChotDonHang" EntitySet="ChotDonHang" />
+      <End Role="ChiTietChotDonHang" EntitySet="ChiTietChotDonHang" />
+    </AssociationSet>
+    <AssociationSet Name="DonVi_ID_FK_On_ChotDonHang" Association="MainDBModel.DonVi_ID_FK_On_ChotDonHang">
+      <End Role="DonVi" EntitySet="DonVi" />
+      <End Role="ChotDonHang" EntitySet="ChotDonHang" />
+    </AssociationSet>
+    <AssociationSet Name="DichVu_ID_FK_On_KhoSo" Association="MainDBModel.DichVu_ID_FK_On_KhoSo">
+      <End Role="DichVu" EntitySet="DichVu" />
+      <End Role="KhoSo" EntitySet="KhoSo" />
+    </AssociationSet>
+    <AssociationSet Name="TinhThanhPho_ID_FK_On_DonHang" Association="MainDBModel.TinhThanhPho_ID_FK_On_DonHang">
+      <End Role="TinhThanhPho" EntitySet="TinhThanhPho" />
+      <End Role="DonHang" EntitySet="DonHang" />
+    </AssociationSet>
+    <AssociationSet Name="DonVi_ID_FK_On_KhachHang" Association="MainDBModel.DonVi_ID_FK_On_KhachHang">
+      <End Role="DonVi" EntitySet="DonVi" />
+      <End Role="KhachHang" EntitySet="KhachHang" />
+    </AssociationSet>
+    <AssociationSet Name="DonVi_ID_FK_On_NguoiDung" Association="MainDBModel.DonVi_ID_FK_On_NguoiDung">
+      <End Role="DonVi" EntitySet="DonVi" />
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="KhachHang_ID_FK_On_NhanVien" Association="MainDBModel.KhachHang_ID_FK_On_NhanVien">
+      <End Role="KhachHang" EntitySet="KhachHang" />
+      <End Role="NhanVien" EntitySet="NhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="QuyenBuuDien_ID_FK_On_NguoiDung" Association="MainDBModel.QuyenBuuDien_ID_FK_On_NguoiDung">
+      <End Role="QuyenBuuDien" EntitySet="QuyenBuuDien" />
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="QuyenKhachHang_ID_FK_On_NhanVien" Association="MainDBModel.QuyenKhachHang_ID_FK_On_NhanVien">
+      <End Role="QuyenKhachHang" EntitySet="QuyenKhachHang" />
+      <End Role="NhanVien" EntitySet="NhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="MainDBModel.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="MainDBModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="MainDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="MainDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="GoogleAuthenticatorSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsGoogleAuthenticatorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="DonVi_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KhachHang_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="NhanVienBuuDien_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="TenNguoiDung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsQuyenKhachHang" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="MainDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="MainDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="DonVi" Relationship="MainDBModel.DonVi_ID_FK_On_AspNetUsers" FromRole="AspNetUsers" ToRole="DonVi" />
+    <NavigationProperty Name="AspNetRoles" Relationship="MainDBModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="CapDaiSo">
+    <Key>
+      <PropertyRef Name="NgayGioCap" />
+    </Key>
+    <Property Name="NgayGioCap" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DichVu_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="Double" />
+    <Property Name="MaSoBatDau" Type="Double" />
+    <Property Name="MaSoKetThuc" Type="Double" />
+    <NavigationProperty Name="DichVu" Relationship="MainDBModel.DichVu_ID_FK_On_CapDaiSo" FromRole="CapDaiSo" ToRole="DichVu" />
+  </EntityType>
+  <EntityType Name="ChiTietChotDonHang">
+    <Key>
+      <PropertyRef Name="SoHieu" />
+    </Key>
+    <Property Name="ChotDonHang_ID" Type="Int32" />
+    <Property Name="SoHieu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ChotDonHang" Relationship="MainDBModel.ChotDonHang_ID_FK_On_ChiTietChotDonHang" FromRole="ChiTietChotDonHang" ToRole="ChotDonHang" />
+  </EntityType>
+  <EntityType Name="ChotDonHang">
+    <Key>
+      <PropertyRef Name="ChotDonHang_ID" />
+    </Key>
+    <Property Name="Ngay" Type="DateTime" Precision="0" />
+    <Property Name="NguoiDung_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="NhanVien_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="KhachHang_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ChotDonHang_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ThoiGianChotDonHang" Type="DateTime" Precision="3" />
+    <Property Name="DonVi_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThaiChotDonHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThaiXacNhanDonHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ThoiGianXacNhanDonHang" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ChiTietChotDonHang" Relationship="MainDBModel.ChotDonHang_ID_FK_On_ChiTietChotDonHang" FromRole="ChotDonHang" ToRole="ChiTietChotDonHang" />
+    <NavigationProperty Name="DonVi" Relationship="MainDBModel.DonVi_ID_FK_On_ChotDonHang" FromRole="ChotDonHang" ToRole="DonVi" />
+  </EntityType>
+  <EntityType Name="DichVu">
+    <Key>
+      <PropertyRef Name="DichVu_ID" />
+    </Key>
+    <Property Name="DichVu_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DichVu1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="MoTaDichVu" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CapDaiSo" Relationship="MainDBModel.DichVu_ID_FK_On_CapDaiSo" FromRole="DichVu" ToRole="CapDaiSo" />
+    <NavigationProperty Name="KhoSo" Relationship="MainDBModel.DichVu_ID_FK_On_KhoSo" FromRole="DichVu" ToRole="KhoSo" />
+  </EntityType>
+  <EntityType Name="DonHang">
+    <Key>
+      <PropertyRef Name="SoHieu" />
+    </Key>
+    <Property Name="Ngay" Type="DateTime" Precision="0" />
+    <Property Name="KhachHang_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="NhanVien_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ThoiGianTaoDonHang" Type="DateTime" Precision="3" />
+    <Property Name="SoHieu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NguoiNhan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChiNguoiNhan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TinhThanhPho_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoDienThoaiNguoiNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoTienThuHo" Type="Double" />
+    <Property Name="NoiDungHang" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TinhThanhPho" Relationship="MainDBModel.TinhThanhPho_ID_FK_On_DonHang" FromRole="DonHang" ToRole="TinhThanhPho" />
+  </EntityType>
+  <EntityType Name="DonVi">
+    <Key>
+      <PropertyRef Name="DonVi_ID" />
+    </Key>
+    <Property Name="DonVi_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DonVi_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="MainDBModel.DonVi_ID_FK_On_AspNetUsers" FromRole="DonVi" ToRole="AspNetUsers" />
+    <NavigationProperty Name="ChotDonHang" Relationship="MainDBModel.DonVi_ID_FK_On_ChotDonHang" FromRole="DonVi" ToRole="ChotDonHang" />
+    <NavigationProperty Name="KhachHang" Relationship="MainDBModel.DonVi_ID_FK_On_KhachHang" FromRole="DonVi" ToRole="KhachHang" />
+    <NavigationProperty Name="NguoiDung" Relationship="MainDBModel.DonVi_ID_FK_On_NguoiDung" FromRole="DonVi" ToRole="NguoiDung" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="KhachHang_ID" />
+    </Key>
+    <Property Name="DonVi_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KhachHang_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="KhachHang_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DonVi" Relationship="MainDBModel.DonVi_ID_FK_On_KhachHang" FromRole="KhachHang" ToRole="DonVi" />
+    <NavigationProperty Name="NhanVien" Relationship="MainDBModel.KhachHang_ID_FK_On_NhanVien" FromRole="KhachHang" ToRole="NhanVien" />
+  </EntityType>
+  <EntityType Name="KhoSo">
+    <Key>
+      <PropertyRef Name="SoHieu" />
+    </Key>
+    <Property Name="DichVu_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoHieu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DichVu" Relationship="MainDBModel.DichVu_ID_FK_On_KhoSo" FromRole="KhoSo" ToRole="DichVu" />
+  </EntityType>
+  <EntityType Name="NguoiDung">
+    <Key>
+      <PropertyRef Name="NguoiDung_ID" />
+    </Key>
+    <Property Name="DonVi_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NguoiDung_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="TenNguoiDung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TenTruyCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuyenBuuDien_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DonVi" Relationship="MainDBModel.DonVi_ID_FK_On_NguoiDung" FromRole="NguoiDung" ToRole="DonVi" />
+    <NavigationProperty Name="QuyenBuuDien" Relationship="MainDBModel.QuyenBuuDien_ID_FK_On_NguoiDung" FromRole="NguoiDung" ToRole="QuyenBuuDien" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="NhanVien_ID" />
+    </Key>
+    <Property Name="KhachHang_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="NhanVien_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="NhanVien1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TenTruyCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuyenKhachHang_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KhachHang" Relationship="MainDBModel.KhachHang_ID_FK_On_NhanVien" FromRole="NhanVien" ToRole="KhachHang" />
+    <NavigationProperty Name="QuyenKhachHang" Relationship="MainDBModel.QuyenKhachHang_ID_FK_On_NhanVien" FromRole="NhanVien" ToRole="QuyenKhachHang" />
+  </EntityType>
+  <EntityType Name="QuyenBuuDien">
+    <Key>
+      <PropertyRef Name="QuyenBuuDien_ID" />
+    </Key>
+    <Property Name="QuyenBuuDien_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuyenBuuDien1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NguoiDung" Relationship="MainDBModel.QuyenBuuDien_ID_FK_On_NguoiDung" FromRole="QuyenBuuDien" ToRole="NguoiDung" />
+  </EntityType>
+  <EntityType Name="QuyenKhachHang">
+    <Key>
+      <PropertyRef Name="QuyenKhachHang_ID" />
+    </Key>
+    <Property Name="QuyenKhachHang_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuyenKhachHang1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NhanVien" Relationship="MainDBModel.QuyenKhachHang_ID_FK_On_NhanVien" FromRole="QuyenKhachHang" ToRole="NhanVien" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TinhThanhPho">
+    <Key>
+      <PropertyRef Name="TinhThanhPho_ID" />
+    </Key>
+    <Property Name="TinhThanhPho_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TinhThanhPho_Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DonHang" Relationship="MainDBModel.TinhThanhPho_ID_FK_On_DonHang" FromRole="TinhThanhPho" ToRole="DonHang" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="MainDBModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MainDBModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="MainDBModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MainDBModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DonVi_ID_FK_On_AspNetUsers">
+    <End Type="MainDBModel.DonVi" Role="DonVi" Multiplicity="0..1" />
+    <End Type="MainDBModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonVi">
+        <PropertyRef Name="DonVi_ID" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="DonVi_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DichVu_ID_FK_On_CapDaiSo">
+    <End Type="MainDBModel.DichVu" Role="DichVu" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MainDBModel.CapDaiSo" Role="CapDaiSo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DichVu">
+        <PropertyRef Name="DichVu_ID" />
+      </Principal>
+      <Dependent Role="CapDaiSo">
+        <PropertyRef Name="DichVu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ChotDonHang_ID_FK_On_ChiTietChotDonHang">
+    <End Type="MainDBModel.ChotDonHang" Role="ChotDonHang" Multiplicity="0..1" />
+    <End Type="MainDBModel.ChiTietChotDonHang" Role="ChiTietChotDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChotDonHang">
+        <PropertyRef Name="ChotDonHang_ID" />
+      </Principal>
+      <Dependent Role="ChiTietChotDonHang">
+        <PropertyRef Name="ChotDonHang_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DonVi_ID_FK_On_ChotDonHang">
+    <End Type="MainDBModel.DonVi" Role="DonVi" Multiplicity="0..1" />
+    <End Type="MainDBModel.ChotDonHang" Role="ChotDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonVi">
+        <PropertyRef Name="DonVi_ID" />
+      </Principal>
+      <Dependent Role="ChotDonHang">
+        <PropertyRef Name="DonVi_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DichVu_ID_FK_On_KhoSo">
+    <End Type="MainDBModel.DichVu" Role="DichVu" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MainDBModel.KhoSo" Role="KhoSo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DichVu">
+        <PropertyRef Name="DichVu_ID" />
+      </Principal>
+      <Dependent Role="KhoSo">
+        <PropertyRef Name="DichVu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TinhThanhPho_ID_FK_On_DonHang">
+    <End Type="MainDBModel.TinhThanhPho" Role="TinhThanhPho" Multiplicity="0..1" />
+    <End Type="MainDBModel.DonHang" Role="DonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TinhThanhPho">
+        <PropertyRef Name="TinhThanhPho_ID" />
+      </Principal>
+      <Dependent Role="DonHang">
+        <PropertyRef Name="TinhThanhPho_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DonVi_ID_FK_On_KhachHang">
+    <End Type="MainDBModel.DonVi" Role="DonVi" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MainDBModel.KhachHang" Role="KhachHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonVi">
+        <PropertyRef Name="DonVi_ID" />
+      </Principal>
+      <Dependent Role="KhachHang">
+        <PropertyRef Name="DonVi_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DonVi_ID_FK_On_NguoiDung">
+    <End Type="MainDBModel.DonVi" Role="DonVi" Multiplicity="0..1" />
+    <End Type="MainDBModel.NguoiDung" Role="NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonVi">
+        <PropertyRef Name="DonVi_ID" />
+      </Principal>
+      <Dependent Role="NguoiDung">
+        <PropertyRef Name="DonVi_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KhachHang_ID_FK_On_NhanVien">
+    <End Type="MainDBModel.KhachHang" Role="KhachHang" Multiplicity="0..1" />
+    <End Type="MainDBModel.NhanVien" Role="NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="KhachHang_ID" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="KhachHang_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuyenBuuDien_ID_FK_On_NguoiDung">
+    <End Type="MainDBModel.QuyenBuuDien" Role="QuyenBuuDien" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MainDBModel.NguoiDung" Role="NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuyenBuuDien">
+        <PropertyRef Name="QuyenBuuDien_ID" />
+      </Principal>
+      <Dependent Role="NguoiDung">
+        <PropertyRef Name="QuyenBuuDien_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuyenKhachHang_ID_FK_On_NhanVien">
+    <End Type="MainDBModel.QuyenKhachHang" Role="QuyenKhachHang" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MainDBModel.NhanVien" Role="NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuyenKhachHang">
+        <PropertyRef Name="QuyenKhachHang_ID" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="QuyenKhachHang_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="MainDBModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+    <End Type="MainDBModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+  </Association>
+</Schema>

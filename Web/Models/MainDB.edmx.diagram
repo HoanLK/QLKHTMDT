@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ac0b31d364e44ea4b05d8f69eb5c3805" Name="Diagram1">
+        <EntityTypeShape EntityType="MainDBModel.AspNetRoles" Width="1.5" PointX="3.75" PointY="14.25" />
+        <EntityTypeShape EntityType="MainDBModel.AspNetUserClaims" Width="1.5" PointX="8.25" PointY="10.75" />
+        <EntityTypeShape EntityType="MainDBModel.AspNetUserLogins" Width="1.5" PointX="8.25" PointY="13.5" />
+        <EntityTypeShape EntityType="MainDBModel.AspNetUsers" Width="1.5" PointX="6" PointY="10.125" />
+        <EntityTypeShape EntityType="MainDBModel.CapDaiSo" Width="1.5" PointX="8" PointY="3.625" />
+        <EntityTypeShape EntityType="MainDBModel.ChiTietChotDonHang" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="MainDBModel.ChotDonHang" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="MainDBModel.DichVu" Width="1.5" PointX="5.75" PointY="2.375" />
+        <EntityTypeShape EntityType="MainDBModel.DonHang" Width="1.5" PointX="13" PointY="1" />
+        <EntityTypeShape EntityType="MainDBModel.DonVi" Width="1.5" PointX="0.75" PointY="8.875" />
+        <EntityTypeShape EntityType="MainDBModel.KhachHang" Width="1.5" PointX="3" PointY="20.5" />
+        <EntityTypeShape EntityType="MainDBModel.KhoSo" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="MainDBModel.NguoiDung" Width="1.5" PointX="3" PointY="10.75" />
+        <EntityTypeShape EntityType="MainDBModel.NhanVien" Width="1.5" PointX="5.25" PointY="20.625" />
+        <EntityTypeShape EntityType="MainDBModel.QuyenBuuDien" Width="1.5" PointX="0.75" PointY="12.25" />
+        <EntityTypeShape EntityType="MainDBModel.QuyenKhachHang" Width="1.5" PointX="3" PointY="18.125" />
+        <EntityTypeShape EntityType="MainDBModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MainDBModel.TinhThanhPho" Width="1.5" PointX="10.75" PointY="2" />
+        <AssociationConnector Association="MainDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MainDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MainDBModel.DonVi_ID_FK_On_AspNetUsers" />
+        <AssociationConnector Association="MainDBModel.DichVu_ID_FK_On_CapDaiSo" />
+        <AssociationConnector Association="MainDBModel.ChotDonHang_ID_FK_On_ChiTietChotDonHang" />
+        <AssociationConnector Association="MainDBModel.DonVi_ID_FK_On_ChotDonHang" />
+        <AssociationConnector Association="MainDBModel.DichVu_ID_FK_On_KhoSo" />
+        <AssociationConnector Association="MainDBModel.TinhThanhPho_ID_FK_On_DonHang" />
+        <AssociationConnector Association="MainDBModel.DonVi_ID_FK_On_KhachHang" />
+        <AssociationConnector Association="MainDBModel.DonVi_ID_FK_On_NguoiDung" />
+        <AssociationConnector Association="MainDBModel.KhachHang_ID_FK_On_NhanVien" />
+        <AssociationConnector Association="MainDBModel.QuyenBuuDien_ID_FK_On_NguoiDung" />
+        <AssociationConnector Association="MainDBModel.QuyenKhachHang_ID_FK_On_NhanVien" />
+        <AssociationConnector Association="MainDBModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

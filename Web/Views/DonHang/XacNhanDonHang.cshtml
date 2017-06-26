@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "XÁC NHẬN ĐƠN HÀNG";
+}
+
+<div ng-controller="xacnhanDonHangController">
+    <div class="form-horizontal">
+        <div class="panel panel-default">
+            <div class="panel-heading ui-draggable-handle">
+                <h3 class="panel-title"><strong>@ViewBag.Title</strong></h3>
+            </div>
+            <div class="panel-body">
+                <!--ChotDonHang Grid-->
+                <div class="col-md-12 col-sm-12 col-xs-12" id="chotDonHang">
+                    <div id="gridContainer" dx-data-grid="gridChotDonHangs"></div>
+                </div>
+
+                <!--CHỐT ĐƠN HÀNG-->
+                <!--Popup Modify-->
+                <div class="popup" dx-popup="popupModifyChotDonHang">
+                    <div data-options="dxTemplate: { name:'templateModifyChotDonHang' }">
+                        <form ng-submit="SaveChotDonHang($event)" dx-validation-group="{chotDonHang}">
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Thời gian chốt đơn</label>
+                                        <div dx-date-box="controlModifyChotDonHang.thoigianChotDonHang"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="dx-field">
+                                        <label>Trạng thái chốt đơn</label>
+                                        <div dx-select-box="controlModifyChotDonHang.trangthaiChotDon"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div id="gridContainer" dx-data-grid="gridDonHangChots"></div>
+                                </div>
+
+                                <div dx-validation-summary="{chotDonHang}"></div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="pull-left" dx-button="{ text: 'Lưu', icon: 'floppy', type: 'success', useSubmitBehavior: true }"></div>
+                                <div class="pull-right" dx-button="{ text: 'Hủy bỏ', icon: 'clear', onClick: CancelSaveChotDonHang, type: 'danger' }"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--Popup Xác nhận-->
+                <div class="popup" dx-popup="popupXacNhanDonHang">
+                    <div data-options="dxTemplate: { name:'templateXacNhanDonHang' }">
+                        <div style="text-align: center" ng-cloak>{{titleXacNhanDonHang}}</div>
+                        <br />
+                        <div dx-button="{ text: 'Có', icon: 'floppy', onClick: ConfirmXacNhanDonHang, type: 'success' }"></div>
+                        <div dx-button="{ text: 'Không', icon: 'clear', onClick: CancelXacNhanDonHang, type: 'danger' }"></div>
+                    </div>
+                </div>
+                <!--Popup Hủy xác nhận-->
+                <div class="popup" dx-popup="popupHuyXacNhanDonHang">
+                    <div data-options="dxTemplate: { name:'templateHuyXacNhanDonHang' }">
+                        <div style="text-align: center" ng-cloak>{{titleHuyXacNhanDonHang}}</div>
+                        <br />
+                        <div dx-button="{ text: 'Có', icon: 'floppy', onClick: ConfirmHuyXacNhanDonHang, type: 'success' }"></div>
+                        <div dx-button="{ text: 'Không', icon: 'clear', onClick: CancelHuyXacNhanDonHang, type: 'danger' }"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

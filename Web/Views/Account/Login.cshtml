@@ -1,0 +1,56 @@
+﻿@using Web.Models
+@model LoginViewModel
+@{
+    Layout = "/Views/Shared/_LayoutNoSidebar.cshtml";
+}
+
+
+
+<div class="login-box animated fadeInDown">
+    @*<div class="login-logo"></div>*@
+    <div class="login-body">
+        <div class="login-title"><strong>Đăng nhập</strong></div>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            <form action="index.html" class="form-horizontal" method="post">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Tài khoản" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Mật khẩu" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <a href="/Account/ForgotPassword" class="btn btn-link btn-block">Quên mật khẩu?</a>
+                    </div>
+                    <div class="col-md-6">
+                        @*<button class="btn btn-info btn-block">Log In</button>*@
+                        <input type="submit" value="Đăng nhập" class="btn btn-info btn-block" />
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+    <div class="login-footer">
+        @*<div class="pull-left">
+            &copy; CMS 2017 by <a href=""></a>
+        </div>*@
+        @*<div class="pull-right">
+                <a href="#">About</a> |
+                <a href="#">Privacy</a> |
+                <a href="#">Contact Us</a>
+            </div>*@
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
