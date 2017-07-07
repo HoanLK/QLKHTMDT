@@ -183,10 +183,12 @@
   <ItemGroup>
     <Compile Include="API\AccountAPIController.cs" />
     <Compile Include="API\ChotDonHangAPIController.cs" />
+    <Compile Include="API\DichVuAPIController.cs" />
     <Compile Include="API\DonHangAPIController.cs" />
     <Compile Include="API\DonViAPIController.cs" />
     <Compile Include="API\KhachHangAPIController.cs" />
     <Compile Include="API\KhoSoAPIController.cs" />
+    <Compile Include="API\LoaiHangAPIController.cs" />
     <Compile Include="API\NhanVienAPIController.cs" />
     <Compile Include="API\TinhThanhPhoAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhoSoController.cs" />
+    <Compile Include="Controllers\LoaiHangController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -265,6 +268,9 @@
       <DependentUpon>MainDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KhoSo.cs">
+      <DependentUpon>MainDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoaiHang.cs">
       <DependentUpon>MainDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MainDB.Context.cs">
@@ -939,6 +945,7 @@
     <Content Include="Content\Templates\Joli\js\plugins\validationengine\languages\jquery.validationEngine-zh_TW.js" />
     <Content Include="Content\Templates\Joli\js\portlet.js" />
     <Content Include="Content\Templates\Joli\js\settings.js" />
+    <Content Include="Content\Templates\myStyle.css" />
     <Content Include="Content\Vendors\angular-1.6.4\angular-animate.js" />
     <Content Include="Content\Vendors\angular-1.6.4\angular-animate.min.js" />
     <Content Include="Content\Vendors\angular-1.6.4\angular-aria.js" />
@@ -3526,6 +3533,9 @@
     <Content Include="Content\Vendors\DevExtreme\Exporter\readme.txt" />
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.android5.light.css" />
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.common.css" />
+    <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.common.min.css">
+      <DependentUpon>dx.common.css</DependentUpon>
+    </Content>
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.contrast.compact.css" />
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.contrast.css" />
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.dark.compact.css" />
@@ -3533,7 +3543,13 @@
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.ios7.default.css" />
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.light.compact.css" />
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.light.css" />
+    <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.light.min.css">
+      <DependentUpon>dx.light.css</DependentUpon>
+    </Content>
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.spa.css" />
+    <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.spa.min.css">
+      <DependentUpon>dx.spa.css</DependentUpon>
+    </Content>
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.win10.black.css" />
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.win10.white.css" />
     <Content Include="Content\Vendors\DevExtreme\Lib\css\dx.win8.black.css" />
@@ -3553,6 +3569,9 @@
     <Content Include="Content\Vendors\DevExtreme\Lib\js\cldr\unresolved.js" />
     <Content Include="Content\Vendors\DevExtreme\Lib\js\cldr\unresolved.min.js" />
     <Content Include="Content\Vendors\DevExtreme\Lib\js\dx.all.debug.js" />
+    <Content Include="Content\Vendors\DevExtreme\Lib\js\dx.all.debug.min.js">
+      <DependentUpon>dx.all.debug.js</DependentUpon>
+    </Content>
     <Content Include="Content\Vendors\DevExtreme\Lib\js\dx.all.js" />
     <Content Include="Content\Vendors\DevExtreme\Lib\js\dx.mobile.debug.js" />
     <Content Include="Content\Vendors\DevExtreme\Lib\js\dx.mobile.js" />
@@ -3674,9 +3693,16 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MainDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="bundleconfig.json.bindings">
+      <DependentUpon>bundleconfig.json</DependentUpon>
+    </Content>
+    <None Include="gulpfile.js" />
     <Content Include="Models\MainDB.edmx.diagram">
       <DependentUpon>MainDB.edmx</DependentUpon>
     </Content>
+    <None Include="bundleconfig.json" />
+    <None Include="package.json" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="Models\MainDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3688,15 +3714,39 @@
       <DependentUpon>MainDB.edmx</DependentUpon>
       <LastGenOutput>MainDB.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Admin\Account\accountController.min.js">
+      <DependentUpon>accountController.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Admin\Account\nhanvienController.js" />
+    <Content Include="Scripts\Admin\Account\nhanvienController.min.js">
+      <DependentUpon>nhanvienController.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Admin\Account\nhanvienquanlyController.js" />
+    <Content Include="Scripts\Admin\Account\nhanvienquanlyController.min.js">
+      <DependentUpon>nhanvienquanlyController.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Admin\Account\registerController.js" />
     <Content Include="Scripts\Admin\Account\accountController.js" />
+    <Content Include="Scripts\Admin\Account\registerController.min.js">
+      <DependentUpon>registerController.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Admin\admin.js" />
+    <Content Include="Scripts\Admin\DonHang\chotDonHangController.min.js">
+      <DependentUpon>chotDonHangController.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Admin\DonHang\quanlyDonHangController.min.js">
+      <DependentUpon>quanlyDonHangController.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Admin\DonHang\xacnhanDonHangController.js" />
     <Content Include="Scripts\Admin\DonHang\chotDonHangController.js" />
     <Content Include="Scripts\Admin\DonHang\quanlyDonHangController.js" />
+    <Content Include="Scripts\Admin\DonHang\xacnhanDonHangController.min.js">
+      <DependentUpon>xacnhanDonHangController.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Admin\Sidebar\infoUserSidebarController.js" />
+    <Content Include="Scripts\Admin\Sidebar\infoUserSidebarController.min.js">
+      <DependentUpon>infoUserSidebarController.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery-1.8.0.js" />
     <Content Include="Scripts\jquery-1.8.0.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -3762,6 +3812,7 @@
     <Folder Include="Content\Templates\Joli\js\plugins\fileinput\fileinput\" />
     <Folder Include="Content\Vendors\angular-1.6.4\i18n\ngLocale\" />
     <Folder Include="Views\KhoSo\" />
+    <Folder Include="Views\LoaiHang\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,0 +1,74 @@
+﻿[
+  {
+    "outputFileName": "Scripts/Admin/Account/accountController.min.js",
+    "inputFiles": [
+      "Scripts/Admin/Account/accountController.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Admin/Account/nhanvienController.min.js",
+    "inputFiles": [
+      "Scripts/Admin/Account/nhanvienController.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Admin/Account/nhanvienquanlyController.min.js",
+    "inputFiles": [
+      "Scripts/Admin/Account/nhanvienquanlyController.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Admin/Account/registerController.min.js",
+    "inputFiles": [
+      "Scripts/Admin/Account/registerController.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Admin/DonHang/chotDonHangController.min.js",
+    "inputFiles": [
+      "Scripts/Admin/DonHang/chotDonHangController.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Admin/DonHang/quanlyDonHangController.min.js",
+    "inputFiles": [
+      "Scripts/Admin/DonHang/quanlyDonHangController.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Admin/DonHang/xacnhanDonHangController.min.js",
+    "inputFiles": [
+      "Scripts/Admin/DonHang/xacnhanDonHangController.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Admin/Sidebar/infoUserSidebarController.min.js",
+    "inputFiles": [
+      "Scripts/Admin/Sidebar/infoUserSidebarController.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/Vendors/DevExtreme/Lib/js/dx.all.debug.min.js",
+    "inputFiles": [
+      "Content/Vendors/DevExtreme/Lib/js/dx.all.debug.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/Vendors/DevExtreme/Lib/css/dx.spa.min.css",
+    "inputFiles": [
+      "Content/Vendors/DevExtreme/Lib/css/dx.spa.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/Vendors/DevExtreme/Lib/css/dx.common.min.css",
+    "inputFiles": [
+      "Content/Vendors/DevExtreme/Lib/css/dx.common.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/Vendors/DevExtreme/Lib/css/dx.light.min.css",
+    "inputFiles": [
+      "Content/Vendors/DevExtreme/Lib/css/dx.light.css"
+    ]
+  }
+]

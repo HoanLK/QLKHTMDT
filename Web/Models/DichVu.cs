@@ -22,7 +22,7 @@ namespace Web.Models
         }
     
         public string DichVu_ID { get; set; }
-        public string DichVu1 { get; set; }
+        public string DichVu_Name { get; set; }
         public string MoTaDichVu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

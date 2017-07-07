@@ -137,6 +137,9 @@ namespace Web.API
 
             try
             {
+                //Update loại hàng
+                UpdateLoaiHang(donHang.LoaiHang_Name);
+
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
@@ -182,6 +185,9 @@ namespace Web.API
 
             try
             {
+                //Update loại hàng
+                UpdateLoaiHang(donHang.LoaiHang_Name);
+
                 db.SaveChanges();
             }
             catch (DbUpdateException)
@@ -246,6 +252,19 @@ namespace Web.API
         private bool DonHangExists(string id)
         {
             return db.DonHang.Count(e => e.SoHieu == id) > 0;
+        }
+
+        private void UpdateLoaiHang(string loaiHang)
+        {
+            var model = db.LoaiHang.Where(p => p.LoaiHang_Name == loaiHang).FirstOrDefault();
+            if(model == null)
+            {
+                db.LoaiHang.Add(new LoaiHang()
+                {
+                    LoaiHang_Name = loaiHang
+                });
+                db.SaveChanges();
+            }
         }
     }
 }

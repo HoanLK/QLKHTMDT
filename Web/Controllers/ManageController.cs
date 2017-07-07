@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -59,10 +59,10 @@ namespace Web.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
+                message == ManageMessageId.ChangePasswordSuccess ? "Mật khẩu đã được thay đổi."
+                : message == ManageMessageId.SetPasswordSuccess ? "Mật khẩu đã được thiết lập."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Bảo mật 2 lớp đã được kích hoạt."
+                : message == ManageMessageId.Error ? "Có lỗi xảy ra."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
@@ -216,7 +216,7 @@ namespace Web.Controllers
         {
             byte[] secretKey = KeyGeneration.GenerateRandomKey(20);
             string userName = User.Identity.GetUserName();
-            string issuer = "DevMovieManager";
+            string issuer = "Hệ thống quản lý đơn hàng thương mại điện tử - Bưu điện Hải Phòng";
             string issuerEncoded = HttpUtility.UrlEncode(issuer);
             string barcodeUrl = KeyUrl.GetTotpUrl(secretKey, userName) + "&issuer=" + issuerEncoded;
 

@@ -17,6 +17,7 @@ namespace Web.Models
         public Nullable<System.DateTime> Ngay { get; set; }
         public string KhachHang_ID { get; set; }
         public string NhanVien_ID { get; set; }
+        public string DichVu_ID { get; set; }
         public Nullable<System.DateTime> ThoiGianTaoDonHang { get; set; }
         public string SoHieu { get; set; }
         public string NguoiNhan { get; set; }
@@ -25,6 +26,8 @@ namespace Web.Models
         public string SoDienThoaiNguoiNhan { get; set; }
         public Nullable<double> SoTienThuHo { get; set; }
         public string NoiDungHang { get; set; }
+        public string LoaiHang_Name { get; set; }
+        public Nullable<double> SoLuong { get; set; }
         public string TrangThai { get; set; }
     
         public virtual TinhThanhPho TinhThanhPho { get; set; }

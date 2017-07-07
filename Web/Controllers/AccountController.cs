@@ -150,7 +150,8 @@ namespace Web.Controllers
             ViewModel.CallbackUrl = callbackUrl;
 #endif
 
-            return View(ViewModel);
+            //return View(ViewModel);
+            return RedirectToAction("Login", "Account");
         }
 
 
@@ -298,14 +299,10 @@ namespace Web.Controllers
             var infoUser = _db.AspNetUsers.Find(currentUser.Id);
 
             //Lấy danh sách khóa ngoại
-            var DonVis = _db.DonVi;
             var KhachHangs = _db.KhachHang.Where(p => p.DonVi_ID == infoUser.DonVi_ID);
 
             //Tạo list cho View
-            ViewBag.DonVi_ID = new SelectList(DonVis, "DonVi_ID", "DonVi_Name", infoUser.DonVi_ID);
-            ViewBag.Role = new SelectList(_context.Roles, "Name", "Name", "Nhân viên quản lý");
             ViewBag.KhachHang_ID = new SelectList(KhachHangs, "KhachHang_ID", "KhachHang_Name");
-
 
             return View();
         }
@@ -315,18 +312,19 @@ namespace Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddNhanVienQuanLy(RegisterViewModel model)
+        public async Task<ActionResult> AddNhanVienQuanLy(AddNhanVienViewModel model)
         {
             var currentUser = _context.Users.Find(User.Identity.GetUserId());
             var infoUser = _db.AspNetUsers.Find(currentUser.Id);
 
+            //Set default
+            model.DonVi_ID = infoUser.DonVi_ID;
+            model.Role = "Nhân viên quản lý";
+
             //Lấy danh sách khóa ngoại
-            var DonVis = _db.DonVi;
             var KhachHangs = _db.KhachHang.Where(p => p.DonVi_ID == infoUser.DonVi_ID);
 
             //Tạo list cho View
-            ViewBag.DonVi_ID = new SelectList(DonVis, "DonVi_ID", "DonVi_Name", infoUser.DonVi_ID);
-            ViewBag.Role = new SelectList(_context.Roles, "Name", "Name", "Nhân viên quản lý");
             ViewBag.KhachHang_ID = new SelectList(KhachHangs, "KhachHang_ID", "KhachHang_Name", model.KhachHang_ID);
 
             if (ModelState.IsValid)
@@ -353,6 +351,8 @@ namespace Web.Controllers
                         temp.TenNguoiDung = model.TenNguoiDung;
                         temp.DiaChi = model.DiaChi;
                         temp.PhoneNumber = model.PhoneNumber;
+                        temp.DonVi_ID = model.DonVi_ID;
+                        temp.KhachHang_ID = model.KhachHang_ID;
                         _db.SaveChanges();
                     }
 
@@ -365,55 +365,13 @@ namespace Web.Controllers
             return View(model);
         }
 
-        //
         // GET: /Account/AddNhanVien
         [AllowAnonymous]
         public ActionResult AddNhanVien()
         {
-            var currentUser = _context.Users.Find(User.Identity.GetUserId());
-            var infoUser = _db.AspNetUsers.Find(currentUser.Id);
-
-            //Lấy danh sách khóa ngoại
-            List<AltListNguoiDung> KhachHangs = new List<AltListNguoiDung>();
-            var users = _context.Users.ToList();
-            foreach (var item in users)
-            {
-                if (item.Roles.ToList()[0].RoleId == "khachhang")
-                {
-                    var user = _db.AspNetUsers.Where(p => p.Id == item.Id).FirstOrDefault();
-                    if (user != null)
-                    {
-                        AltListNguoiDung account = new AltListNguoiDung()
-                        {
-                            Id = user.Id,
-                            TenNguoiDung = user.TenNguoiDung,
-                            Email = user.Email,
-                            PhoneNumber = user.PhoneNumber,
-                            DonVi_ID = user.DonVi_ID,
-                            EmailConfirmed = user.EmailConfirmed,
-                            TwoFactor = user.TwoFactorEnabled
-                        };
-
-                        KhachHangs.Add(account);
-                    }
-                }
-            }
-
-            //Tạo list cho View
-            if(currentUser.Roles.ToList()[0].RoleId == "khachhang")
-            {
-                ViewBag.KhachHang_ID = new SelectList(KhachHangs, "Id", "TenNguoiDung", currentUser.Id);
-            }
-            else
-            {
-                ViewBag.KhachHang_ID = new SelectList(KhachHangs, "Id", "TenNguoiDung");
-            }
-            
-
             return View();
         }
 
-        //
         // POST: /Account/AddNhanVien
         [HttpPost]
         [AllowAnonymous]
@@ -423,44 +381,9 @@ namespace Web.Controllers
             var currentUser = _context.Users.Find(User.Identity.GetUserId());
             var infoUser = _db.AspNetUsers.Find(currentUser.Id);
 
-            //Lấy danh sách khóa ngoại
-            List<AltListNguoiDung> KhachHangs = new List<AltListNguoiDung>();
-            var users = _context.Users.ToList();
-            foreach (var item in users)
-            {
-                if (item.Roles.ToList()[0].RoleId == "khachhang")
-                {
-                    var user = _db.AspNetUsers.Where(p => p.Id == item.Id).FirstOrDefault();
-                    if (user != null)
-                    {
-                        AltListNguoiDung account = new AltListNguoiDung()
-                        {
-                            Id = user.Id,
-                            TenNguoiDung = user.TenNguoiDung,
-                            Email = user.Email,
-                            PhoneNumber = user.PhoneNumber,
-                            DonVi_ID = user.DonVi_ID,
-                            EmailConfirmed = user.EmailConfirmed,
-                            TwoFactor = user.TwoFactorEnabled
-                        };
-
-                        KhachHangs.Add(account);
-                    }
-                }
-            }
-
-            //Tạo list cho View
-            if (currentUser.Roles.ToList()[0].RoleId == "khachhang")
-            {
-                ViewBag.KhachHang_ID = new SelectList(KhachHangs, "Id", "TenNguoiDung", currentUser.Id);
-            }
-            else
-            {
-                ViewBag.KhachHang_ID = new SelectList(KhachHangs, "Id", "TenNguoiDung", model.KhachHang_ID);
-            }
-
-
             model.Role = "Nhân viên";
+            model.KhachHang_ID = infoUser.KhachHang_ID;
+            model.DonVi_ID = infoUser.DonVi_ID;
 
             if (ModelState.IsValid)
             {
@@ -492,7 +415,7 @@ namespace Web.Controllers
                         _db.SaveChanges();
                     }
 
-                    return View("NhanVien");
+                    return RedirectToAction("NhanVien");
                 }
                 AddErrors(result);
             }
@@ -681,6 +604,17 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Account");
         }
 
+        public ActionResult DeleteNhanVienQuanLy(string id)
+        {
+            var user = _context.Users.Find(id);
+
+            _context.Users.Remove(user);
+
+            _context.SaveChanges();
+
+            return RedirectToAction("NhanVienQuanLy", "Account");
+        }
+
         public ActionResult DeleteNhanVien(string id)
         {
             var user = _context.Users.Find(id);
@@ -807,6 +741,45 @@ namespace Web.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        //Get Nhân viên chốt đơn theo Khách hàng
+        public JsonResult GetNhanVienChotDonByKhachHang(string id)
+        {
+            var nhanviens = (
+                from nv in _db.AspNetUsers
+                where nv.KhachHang_ID == id
+                select new AltListNhanVien()
+                {
+                    Id = nv.Id,
+                    TenNguoiDung = nv.TenNguoiDung,
+                    KhachHang_ID = nv.KhachHang_ID,
+                    DonVi_ID = nv.DonVi_ID,
+                    DiaChi = nv.DiaChi,
+                    Email = nv.Email,
+                    PhoneNumber = nv.PhoneNumber,
+                    EmailConfirmed = nv.EmailConfirmed,
+                    TwoFactor = nv.TwoFactorEnabled
+                }
+            ).ToList();
+
+            if(nhanviens != null)
+            {
+                List<AltListNhanVien> model = new List<AltListNhanVien>();
+
+                foreach (var item in nhanviens)
+                {
+                    var role = _context.Users.Where(p => p.Id == item.Id).FirstOrDefault().Roles.ToList()[0].RoleId;
+                    if(role == "nhanvien")
+                    {
+                        model.Add(item);
+                    }
+                }
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+
+            return null;
+        }
+
         public string GetRoleByAccount(string Id)
         {
             var user = _context.Users.Where(p => p.Id == Id).FirstOrDefault();
@@ -818,18 +791,5 @@ namespace Web.Controllers
 
             return null;
         }
-
-
-        //public JsonResult GetNhanVienByKhachHang(string id)
-        //{
-        //    List<AltListNhanVien> model = new List<AltListNhanVien>();
-
-        //    var users = _context.Users.ToList();
-
-        //    foreach (var item in users)
-        //    {
-        //        if()
-        //    }
-        //}
     }
 }

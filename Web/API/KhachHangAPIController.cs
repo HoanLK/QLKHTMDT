@@ -19,6 +19,9 @@ namespace Web.API
         // GET: api/KhachHangAPI
         public IQueryable<KhachHang> GetKhachHang()
         {
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
+
             return db.KhachHang;
         }
 
@@ -26,6 +29,9 @@ namespace Web.API
         [ResponseType(typeof(KhachHang))]
         public IHttpActionResult GetKhachHang(string id)
         {
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
+
             KhachHang khachHang = db.KhachHang.Find(id);
             if (khachHang == null)
             {
@@ -33,6 +39,22 @@ namespace Web.API
             }
 
             return Ok(khachHang);
+        }
+
+        //GET: api/KhachHangAPI?att=...&&value=...
+        [ResponseType(typeof(DonHang))]
+        public IQueryable<KhachHang> GetKhachHang(string att, string value)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
+
+            if (att == "DonVi")
+            {
+                var model = db.KhachHang.Where(p => p.DonVi_ID == value);
+                return model;
+            }
+
+            return null;
         }
 
         // PUT: api/KhachHangAPI/5
@@ -74,6 +96,9 @@ namespace Web.API
         [ResponseType(typeof(KhachHang))]
         public IHttpActionResult PostKhachHang(KhachHang khachHang)
         {
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

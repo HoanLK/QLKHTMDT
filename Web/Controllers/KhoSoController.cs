@@ -29,6 +29,19 @@ namespace Web.Controllers
             }
         }
 
+        public JsonResult GetSoHieuChuaCapByDichVu(string id)
+        {
+            using (MainDBEntities db = new MainDBEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                db.Configuration.ProxyCreationEnabled = false;
+
+                var model = db.KhoSo.Where(p => p.DichVu_ID == id && p.TrangThai.Contains("CHUACAP")).FirstOrDefault();
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public int XacNhanCap(string id)
         {
             using(MainDBEntities db = new MainDBEntities())

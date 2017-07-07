@@ -37,6 +37,7 @@ namespace Web.Models
         public virtual DbSet<DonVi> DonVi { get; set; }
         public virtual DbSet<KhachHang> KhachHang { get; set; }
         public virtual DbSet<KhoSo> KhoSo { get; set; }
+        public virtual DbSet<LoaiHang> LoaiHang { get; set; }
         public virtual DbSet<NguoiDung> NguoiDung { get; set; }
         public virtual DbSet<NhanVien> NhanVien { get; set; }
         public virtual DbSet<QuyenBuuDien> QuyenBuuDien { get; set; }

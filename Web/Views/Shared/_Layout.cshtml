@@ -31,34 +31,28 @@
 
     <!-- TEMPLATE -->
     <link href="~/Content/Templates/Joli/css/theme-default.css" rel="stylesheet" />
+
+
+    <link href="~/Content/Templates/myStyle.css" rel="stylesheet" />
 </head>
-<body>
-    @{ 
+<body onload="loadFunction()">
+    @{
         MainDBEntities db = new MainDBEntities();
         ApplicationDbContext _context = new ApplicationDbContext();
         var idUser = User.Identity.GetUserId();
         var userInfo = db.AspNetUsers.Where(p => p.Id == idUser).FirstOrDefault();
         var user = _context.Users.Where(p => p.Id == idUser).FirstOrDefault();
-        string tenKhachHang = "";
-        string diachiKhachHang = "";
-        if(user.Roles.ToList()[0].RoleId == "khachhang")
+        KhachHang khachhang = db.KhachHang.Where(p => p.KhachHang_ID == userInfo.KhachHang_ID).FirstOrDefault();
+        string tenDonVi = "";
+        if (user.Roles.ToList()[0].RoleId == "nhanvienbuudien")
         {
-            tenKhachHang = userInfo.TenNguoiDung;
-            diachiKhachHang = userInfo.DiaChi;
-        }
-        if (user.Roles.ToList()[0].RoleId == "nhanvien")
-        {
-            var khachhang = db.AspNetUsers.Where(p => p.Id == userInfo.KhachHang_ID).FirstOrDefault();
-            if(khachhang != null)
-            {
-                tenKhachHang = khachhang.TenNguoiDung;
-                diachiKhachHang = khachhang.DiaChi;
-            }
+            tenDonVi = db.DonVi.Where(p => p.DonVi_ID == userInfo.DonVi_ID).FirstOrDefault().DonVi_Name;
         }
     }
     <!--User and Roles-->
     <input type="hidden" value="@User.Identity.GetUserId()" id="idUser" />
-    <div class="page-container">
+    <div id="loader"></div>
+    <div class="page-container" id="myContent">
         <!-- SIDEBAR -->
         <div class="page-sidebar page-sidebar-fixed scroll mCustomScrollbar _mCS_1 mCS-autoHide">
             <!-- X-NAVIGATION -->
@@ -82,17 +76,17 @@
                             <div class="profile-data-name">@userInfo.TenNguoiDung</div>
                             @if (user.Roles.ToList()[0].RoleId == "nhanvienbuudien")
                             {
-                                <div class="profile-data-title">Nhân viên Bưu điện</div>
+                                <div class="profile-data-title">@tenDonVi</div>
                             }
-                            @if (user.Roles.ToList()[0].RoleId == "khachhang")
+                            @if (user.Roles.ToList()[0].RoleId == "nhanvienquanly")
                             {
-                                <div class="profile-data-title">Khách hàng</div>
+                                <div class="profile-data-title">Nhân viên quản lý</div>
                             }
                             @if (user.Roles.ToList()[0].RoleId == "nhanvien")
                             {
                                 <div class="profile-data-title">Nhân viên</div>
                             }
-                            
+
                         </div>
                         <div class="profile-controls">
                             <a href="/Manage" class="profile-control-left" title="Chỉnh sửa thông tin"><span class="fa fa-info"></span></a>
@@ -100,22 +94,6 @@
                         </div>
                     </div>
                 </li>
-                @*<li class="xn-title">Navigation</li>*@
-                @*<li>
-                    <a href="/Account/KhachHang"><span class="fa  fa-user-secret"></span> <span class="xn-text">Danh sách Khách hàng</span></a>
-                </li>
-                <li>
-                    <a href="/Account/NhanVien"><span class="fa  fa-user-circle-o"></span> <span class="xn-text">Danh sách Nhân viên</span></a>
-                </li>
-                <li>
-                    <a href="/DonHang/QuanLyDonHang"><span class="fa fa-list-alt"></span> <span class="xn-text">Quản lý đơn hàng</span></a>
-                </li>
-                <li>
-                    <a href="/DonHang/ChotDonHang"><span class="fa fa-thumb-tack"></span> <span class="xn-text">Chốt đơn hàng</span></a>
-                </li>
-                <li>
-                    <a href="/DonHang/XacNhanDonHang"><span class="fa fa-check"></span> <span class="xn-text">Xác nhận đơn hàng</span></a>
-                </li>*@
                 @if (user.Roles.ToList()[0].RoleId == "nhanvienbuudien")
                 {
                     <li>
@@ -125,7 +103,7 @@
                         <a href="/DonHang/XacNhanDonHang"><span class="fa fa-check"></span> <span class="xn-text">Xác nhận đơn hàng</span></a>
                     </li>
                 }
-                @if (user.Roles.ToList()[0].RoleId == "khachhang")
+                @if (user.Roles.ToList()[0].RoleId == "nhanvienquanly")
                 {
                     <li>
                         <a href="/Account/NhanVien"><span class="fa  fa-user-circle-o"></span> <span class="xn-text">Danh sách Nhân viên</span></a>
@@ -142,7 +120,7 @@
                 }
 
             </ul>
-            
+
         </div>
 
         <!-- CONTENT -->
@@ -158,10 +136,14 @@
                     <b style="font-size: 1.3em; text-transform: uppercase; color: #00458A">Bưu điện thành phố Hải Phòng</b><br />
                     <span style="font-size: 1.1em">Hệ thống quản lý đơn hàng khách hàng thương mại điện tử</span><br />
                 </li>
-                <li style="padding-left: 200px; margin-top: 10px">
-                    <b>Khách hàng: @tenKhachHang</b><br />
-                    <b>Địa chỉ: @diachiKhachHang</b><br />
-                </li>
+                @if (khachhang != null)
+                {
+                    <li style="padding-left: 200px; margin-top: 5px">
+                        <b>Khách hàng: @khachhang.KhachHang_Name</b><br />
+                        <b>Địa chỉ: @khachhang.DiaChi</b><br />
+                        <b>Điện thoại: @khachhang.DienThoai</b>
+                    </li>
+                }
             </ul>
             <!-- BREADCRUMB -->
             @*<ul class="breadcrumb">
@@ -172,7 +154,8 @@
                     <h2><span class="fa fa-arrow-circle-o-left"></span> Page Title</h2>
                 </div>*@
             <!-- CONTENT WRAPPER -->
-            <div class="page-content-wrap">
+            
+            <div class="page-content-wrap" >
                 <div class="row">
                     <div class="col-md-12" style="margin:0px; padding: 0px;">
                         @RenderBody()
@@ -185,6 +168,19 @@
 
     <!-- SCRIPTS -->
     @RenderSection("scripts", required: false)
+
+    <script>
+        var myVar;
+
+        function loadFunction() {
+            myVar = setTimeout(showPage, 1000);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myContent").style.display = "block";
+        }
+    </script>
 
     <!-- PLUGINS -->
     <script src="~/Content/Templates/Joli/js/plugins/jquery/jquery.min.js"></script>
@@ -244,26 +240,26 @@
     <script src="~/Content/Vendors/DevExtreme/Lib/js/globalize/number.min.js"></script>
     <script src="~/Content/Vendors/DevExtreme/Lib/js/globalize/currency.min.js"></script>
     <script src="~/Content/Vendors/DevExtreme/Lib/js/globalize/date.min.js"></script>
-    <script src="~/Content/Vendors/DevExtreme/Lib/js/dx.all.js"></script>
+    @*<script src="~/Content/Vendors/DevExtreme/Lib/js/dx.all.js"></script>*@
+    <script src="~/Content/Vendors/DevExtreme/Lib/js/dx.all.debug.min.js"></script>
 
     <!-- MY SCRIPTS-->
     <script src="~/Scripts/Admin/admin.js"></script>
 
     <!--Service-->
-
     <!--Controller-->
     <!--Sidebar-->
-    <script src="~/Scripts/Admin/Sidebar/infoUserSidebarController.js"></script>
+    <script src="~/Scripts/Admin/Sidebar/infoUserSidebarController.min.js"></script>
     <!--Account-->
-    <script src="~/Scripts/Admin/Account/accountController.js"></script>
-    <script src="~/Scripts/Admin/Account/registerController.js"></script>
-    <script src="~/Scripts/Admin/Account/nhanvienquanlyController.js"></script>
-    <script src="~/Scripts/Admin/Account/nhanvienController.js"></script>
+    <script src="~/Scripts/Admin/Account/accountController.min.js"></script>
+    <script src="~/Scripts/Admin/Account/registerController.min.js"></script>
+    <script src="~/Scripts/Admin/Account/nhanvienquanlyController.min.js"></script>
+    <script src="~/Scripts/Admin/Account/nhanvienController.min.js"></script>
 
     <!--Đơn hàng-->
-    <script src="~/Scripts/Admin/DonHang/quanlyDonHangController.js"></script>
-    <script src="~/Scripts/Admin/DonHang/chotDonHangController.js"></script>
-    <script src="~/Scripts/Admin/DonHang/xacnhanDonHangController.js"></script>
+    <script src="~/Scripts/Admin/DonHang/quanlyDonHangController.min.js"></script>
+    <script src="~/Scripts/Admin/DonHang/chotDonHangController.min.js"></script>
+    <script src="~/Scripts/Admin/DonHang/xacnhanDonHangController.min.js"></script>
 
 </body>
 </html>

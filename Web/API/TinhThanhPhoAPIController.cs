@@ -16,13 +16,22 @@ namespace Web.API
     {
         private MainDBEntities db = new MainDBEntities();
 
-        // GET: api/TinhThanhPhoAPI
-        public IQueryable<TinhThanhPho> GetTinhThanhPho()
+        TinhThanhPhoAPIController()
         {
             db.Configuration.LazyLoadingEnabled = false;
             db.Configuration.ProxyCreationEnabled = false;
+        }
 
-            return db.TinhThanhPho;
+        // GET: api/TinhThanhPhoAPI
+        public IQueryable<TinhThanhPho> GetTinhThanhPho()
+        {
+            var model = db.TinhThanhPho;
+            foreach (var item in model)
+            {
+                item.TinhThanhPho_Name = item.TinhThanhPho_ID + " - " + item.TinhThanhPho_Name;
+            }
+
+            return model;
         }
 
         // GET: api/TinhThanhPhoAPI/5

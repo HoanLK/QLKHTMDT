@@ -25,7 +25,7 @@ namespace Web.Controllers
                 {
                     return RedirectToAction("QuanLyDonHang", "DonHang");
                 }
-                if (user.Roles.ToList()[0].RoleId == "khachhang")
+                if (user.Roles.ToList()[0].RoleId == "nhanvienquanly")
                 {
                     return RedirectToAction("ChotDonHang", "DonHang");
                 }

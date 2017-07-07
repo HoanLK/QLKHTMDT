@@ -209,6 +209,7 @@ namespace Web.Controllers
                     if (chotDonHang != null)
                     {
                         chotDonHang.TrangThaiXacNhanDonHang = "DAXACNHAN";
+                        chotDonHang.ThoiGianXacNhanDonHang = DateTime.Now;
                     }
                 }
 
@@ -242,6 +243,7 @@ namespace Web.Controllers
                     if (chotDonHang != null)
                     {
                         chotDonHang.TrangThaiXacNhanDonHang = "CHUAXACNHAN";
+                        chotDonHang.ThoiGianXacNhanDonHang = null;
                     }
                 }
 
@@ -256,6 +258,59 @@ namespace Web.Controllers
                     throw;
                 }
 
+            }
+        }
+
+        public JsonResult GetChiTietByPhieuChotForExport(string id)
+        {
+            using(MainDBEntities db = new MainDBEntities())
+            {
+                int idPhieuChot;
+                if (int.TryParse(id, out idPhieuChot))
+                {
+                    var phieuchot = db.ChotDonHang.Where(p => p.ChotDonHang_ID == idPhieuChot).FirstOrDefault();
+                    var chitietPhieuChots = db.ChiTietChotDonHang.Where(p => p.ChotDonHang_ID == idPhieuChot).ToList();
+                    if(chitietPhieuChots != null)
+                    {
+                        var khachhang = db.KhachHang.Where(p => p.KhachHang_ID == phieuchot.KhachHang_ID).FirstOrDefault();
+
+                        List<AltChiTietPhieuChotExport> chitietExports = new List<AltChiTietPhieuChotExport>();
+                        foreach (var item in chitietPhieuChots)
+                        {
+                            var donhang = db.DonHang.Where(p => p.SoHieu == item.SoHieu).FirstOrDefault();
+                            if(donhang != null)
+                            {
+                                AltChiTietPhieuChotExport chitietExport = new AltChiTietPhieuChotExport();
+                                chitietExport.SoHieu = donhang.SoHieu;
+                                chitietExport.TenNguoiNhan = donhang.NguoiNhan;
+                                chitietExport.DiaChiNguoiNhan = donhang.DiaChiNguoiNhan;
+                                chitietExport.TinhPhat = db.TinhThanhPho.Where(p => p.TinhThanhPho_ID == donhang.TinhThanhPho_ID).FirstOrDefault().TinhThanhPho_Name;
+                                chitietExport.MaTinhPhat = donhang.TinhThanhPho_ID;
+                                chitietExport.SoDTNguoiNhan = donhang.SoDienThoaiNguoiNhan;
+                                chitietExport.SoTienCOD = donhang.SoTienThuHo.ToString();
+                                chitietExport.MaDonHang = donhang.SoDienThoaiNguoiNhan;
+                                chitietExport.MaSo = null;
+                                chitietExport.NoiDungHang = donhang.LoaiHang_Name;
+                                chitietExport.TrongLuong = null;
+                                chitietExport.ChieuDai = null;
+                                chitietExport.ChieuRong = null;
+                                chitietExport.ChieuCao = null;
+                                chitietExport.PhatDongKiem = null;
+                                chitietExport.VUN = null;
+                                chitietExport.VungSauVungXa = null;
+                                chitietExport.TenShop = khachhang.KhachHang_Name;
+                                chitietExport.DiaChiShop = khachhang.DiaChi;
+                                chitietExport.SoDienThoaiShop = khachhang.DienThoai;
+
+                                chitietExports.Add(chitietExport);
+                            }
+                        }
+
+                        return Json(chitietExports, JsonRequestBehavior.AllowGet);
+                    }
+                }
+
+                return null;
             }
         }
     }
